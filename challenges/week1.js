@@ -7,11 +7,8 @@ function capitalize(word) {
 function generateInitials(firstName, lastName) {
   if (firstName === undefined) throw new Error("firstName is required");
   if (lastName === undefined) throw new Error("lastName is required");
-  const fName = firstName.split('');     // split first name
-  const lName = lastName.split('');      //split last name
-  //take the first letter of firstname and lastname, concatenate and capitalize them.
-  const splitNames = fName[0].toUpperCase() + '.' + lName[0].toUpperCase();
-  return splitNames     //return the first letters of the first and lastnames as initials.
+  
+  return firstName.split('')[0].toUpperCase() + '.' + lastName.split('')[0].toUpperCase();
 }
 
 function addVAT(originalPrice, vatRate) {
@@ -20,8 +17,7 @@ function addVAT(originalPrice, vatRate) {
   // divide VAT rate by 100 first, then add 1 and then multiply by original price
   var val = originalPrice * (1 + (vatRate / 100));
   //round the number returned to 2 decimal places
-  var roundedVal = Math.round(val * 100) / 100;
-  return roundedVal;
+  return Math.round(val * 100) / 100;
 }
 
 function getSalePrice(originalPrice, reduction) {
