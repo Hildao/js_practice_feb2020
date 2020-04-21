@@ -4,6 +4,13 @@
  */
 const sumDigits = n => {
   if (n === undefined) throw new Error("n is required");
+  //if (typeof n !== "number") throw new Error("n is required");
+
+  sum = 0;
+  for (let i = 0; i < n.length; i++) {
+    sum += parseInt(n[i]);
+  };
+  return sum;
 };
 
 /**
@@ -17,6 +24,19 @@ const sumDigits = n => {
 const createRange = (start, end, step) => {
   if (start === undefined) throw new Error("start is required");
   if (end === undefined) throw new Error("end is required");
+  //if (typeof start !== "number" && typeof end !== "number") throw new Error("start and end arguements must be numbers");
+
+  let Array = [];
+  if (step === undefined) {
+    step = 1;
+  }
+
+  if (step > 0) {
+    for (let i = start; i <= end; i += step) {
+      Array.push(i);
+    }
+    return Array;
+  };
 };
 
 /**
@@ -51,6 +71,7 @@ const createRange = (start, end, step) => {
 const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
+
 };
 
 /**
