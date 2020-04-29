@@ -4,7 +4,6 @@
  */
 const sumDigits = n => {
   if (n === undefined) throw new Error("n is required");
-  //if (typeof n !== "number") throw new Error("n is required");
 
   sum = 0;
   for (let i = 0; i < n.length; i++) {
@@ -24,7 +23,8 @@ const sumDigits = n => {
 const createRange = (start, end, step) => {
   if (start === undefined) throw new Error("start is required");
   if (end === undefined) throw new Error("end is required");
-  //if (typeof start !== "number" && typeof end !== "number") throw new Error("start and end arguements must be numbers");
+  if (typeof start !== "number" || typeof end !== "number") throw new Error("start and end arguements must be numbers");
+  if (step !== undefined && typeof step !== 'number') throw new Error("step arguement must be a number");
 
   let Array = [];
   if (step === undefined) {
@@ -71,7 +71,19 @@ const createRange = (start, end, step) => {
 const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
+  if (!Array.isArray(users)) throw new Error("Try again. An Array and a string is required");
 
+  newArr = []
+  // Loop through users to get each user
+  users.forEach((user) => {
+    user.screenTime.forEach((apptime) => {       //  Loop through screentime to get each user screentime
+      let sumScreenTime = Object.values(apptime.usage).reduce((a, b) => a + b);  // use reduce() to get the sum of screentime
+      if (apptime.date === date && sumScreenTime > 100) {
+        newArr.push(user.username)
+      }
+    });
+  });
+  return newArr;
 };
 
 /**
@@ -86,6 +98,20 @@ const getScreentimeAlertList = (users, date) => {
  */
 const hexToRGB = hexStr => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+  if (typeof hexStr !== "string") throw new Error("Hexcode is required to be a string. Please try again");
+
+  // 6-digit hex value, concatenate the first two for red, next 2 for green and the last 2 for blue
+  //  To get the values for the final RGB() string, prepend the variables with + to convert them from strings back to numbers which will yield the decimal needed
+
+  let r = 0, g = 0, b = 0;
+
+  //  6 digits  
+  if (hexStr.length === 7) {
+    r = "0x" + hexStr[1] + hexStr[2];
+    g = "0x" + hexStr[3] + hexStr[4];
+    b = "0x" + hexStr[5] + hexStr[6];
+  };
+  return "rgb(" + +r + "," + +g + "," + +b + ")";
 };
 
 /**
@@ -100,6 +126,35 @@ const hexToRGB = hexStr => {
  */
 const findWinner = board => {
   if (board === undefined) throw new Error("board is required");
+  if (!Array.isArray(board)) throw new Error("Incorrect arguement, board is required as an array");
+
+  /** 
+  There are 8 possible winning positions to check
+  row1 = [0, 1, 2]
+  row2 = [3, 4, 5]
+  row3 = [6, 7, 8]
+  col1 = [0, 3, 6]
+  col2 = [1, 4, 7]
+  col3 = [2, 5, 8]
+  diagonal1 = [0, 4, 8]
+  diagonal2 = [2, 4, 6]
+*/
+
+  let arr = [].concat(...board);
+
+  let result = "";
+
+  if ((arr[0] !== null) && arr[0] === arr[1] && (arr[1] === arr[2])) result = arr[0]
+  else if ((arr[3] !== null) && arr[3] === arr[4] && (arr[4] === arr[5])) result = arr[3]
+  else if ((arr[6] !== null) && arr[6] === arr[7] && (arr[7] === arr[8])) result = arr[6]
+  else if ((arr[0] !== null) && arr[0] === arr[3] && (arr[3] === arr[6])) result = arr[0]
+  else if ((arr[1] !== null) && arr[1] === arr[4] && (arr[4] === arr[7])) result = arr[1]
+  else if ((arr[2] !== null) && arr[2] === arr[5] && (arr[5] === arr[8])) result = arr[2]
+  else if ((arr[0] !== null) && arr[0] === arr[4] && (arr[4] === arr[8])) result = arr[0]
+  else if ((arr[2] !== null) && arr[2] === arr[4] && (arr[4] === arr[6])) result = arr[2]
+  else result = null;
+
+  return result;
 };
 
 module.exports = {
