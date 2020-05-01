@@ -1,9 +1,4 @@
-const { sumDigits } = require("../challenges/week10");
-const { createRange } = require("../challenges/week10");
-const { getScreentimeAlertList } = require("../challenges/week10");
-const { hexToRGB } = require("../challenges/week10");
-const { findWinner } = require("../challenges/week10");
-
+const { sumDigits, createRange, getScreentimeAlertList, hexToRGB, findWinner } = require("../challenges/week10");
 
 describe("sumDigits", () => {
     test("It throws an error if not passed a number", () => {
