@@ -1,8 +1,7 @@
 # JavaScript & Sugar.js Practice
-***
 
-### JavaScript
-***
+
+## JavaScript
 
 This repository contains a number of problems solved using JavaScript.
 
@@ -21,8 +20,7 @@ To run the test suite:
   npm test
 
 
-### Sugar.js
-***
+## Sugar.js
 
 [Sugar.js](https://sugarjs.com/) is a JavaScript utility library for working with native objects. It allows, amongst other things, extension of the Object object with additional helpful methods.
 
